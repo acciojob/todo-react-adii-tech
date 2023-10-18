@@ -1,1 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+ul>li{
+    list-style: none;
+
+}
+.lis{
+    display: flex;
+    gap: 1vw;
+    margin-top: 1vw;
+}
