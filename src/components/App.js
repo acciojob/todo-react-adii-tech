@@ -5,21 +5,28 @@ import { useState } from "react";
 
 const App = () => {
   const [list, setList]=useState([]);
-  const [text,setText]=useState("");
+  const [text,setText]=useState({});
 
   const addToDo = ()=>{
        setList([text,...list]);
-       setText(""); 
+       //setText(""); 
   }
   const change=(e)=>{
-    setText(e.target.value);
+    const userInput = { 
+      // Add a random id which is used to delete 
+      id: Math.random(), 
+
+      // Add a user value to list 
+      value: e.target.value, 
+  }
+    setText(userInput);
    // console.log(e)
   }
-  const deleteToDo =(e)=>{
+  const deleteToDo =(key)=>{
    // console.log(e.currentTarget+ "123Check");
-    console.log(e.target)
+    const updateList = list.filter((item) => item.id !== key);
     //const updateList = list.filter((item) => item.id !== ); 
-     //  setList([])
+    setList(updateList);
   }
   console.log(list +" "+ text)
   return (
@@ -34,8 +41,8 @@ const App = () => {
               list.map((ele)=>(
                 <>
                 <div className="lis">
-                <li>{ele}</li> 
-                <button className="remove-btn" onClick={(event)=>deleteToDo(event)}>Delete</button>
+                <li>{ele.value}</li> 
+                <button className="remove-btn" onClick={()=>deleteToDo(ele.id)}>Delete</button>
                 </div> 
                 </>
               ))  
